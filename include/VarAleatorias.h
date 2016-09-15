@@ -6,6 +6,8 @@
 
 using namespace std;
 
+/* Generador de numeros aleatorios basado en distrubuciones de
+   variables aleadorias*/
 class VarAleatorias
 {
     public:
