@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1473712314 source:/home/bryan/Documentos/codigo/c++/Simulacion/main.cpp
+	<iostream>
+	"Eventos.h"
+	"VarAleatorias.h"
+
+1473978925 /home/bryan/Documentos/codigo/c++/Simulacion/include/Eventos.h
+
+1473980188 /home/bryan/Documentos/codigo/c++/Simulacion/include/VarAleatorias.h
+	<random>
+	<cmath>
+
+1473711444 source:/home/bryan/Documentos/codigo/c++/Simulacion/src/Eventos.cpp
+	"Eventos.h"
+
