@@ -1,9 +1,9 @@
 #include "Eventos.h"
 #include "VarAleatorias.h"
 
-Eventos::Eventos()
+Eventos::Eventos(float t[])
 {
-    //ctor
+    tiempo = t;
 }
 
 Eventos::~Eventos()

@@ -1,11 +1,15 @@
 #ifndef EVENTOS_H
 #define EVENTOS_H
+
+#include "VarAleatorias.h"
+enum EVENTOS{ARRIBOPAQC1, ARRIBOMSJC1, LIBSERVC1, LLEGAACK, DEVOLMSJC1, LLEGAMSJC2,
+             LIBSERVC2, LLEGAPAQC3, LIBSERVC3, TEMP};
 #include <vector>
 
 class Eventos
 {
     public:
-        Eventos();
+        Eventos(float t[]);
         virtual ~Eventos();
         void arriboPaqC1();
         void arriboMsjC1();
@@ -19,6 +23,8 @@ class Eventos
         void temp();
 
     private:
+	VarAleatorias aleatorio;
+        float *tiempo;
 
         struct ProcesosC1{
             bool proc1 = false;

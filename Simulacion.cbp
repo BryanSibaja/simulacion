@@ -25,9 +25,11 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Eventos.h" />
+		<Unit filename="include/Simulacion.h" />
 		<Unit filename="include/VarAleatorias.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Eventos.cpp" />
+		<Unit filename="src/Simulacion.cpp" />
 		<Unit filename="src/VarAleatorias.cpp" />
 		<Extensions>
 			<code_completion />
