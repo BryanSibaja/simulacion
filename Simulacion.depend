@@ -32,3 +32,23 @@
 	"Eventos.h"
 	"VarAleatorias.h"
 
+1474149964 source:/home/bryan/Documentos/codigo/c++/simulacion/main.cpp
+	<iostream>
+	"Eventos.h"
+	"VarAleatorias.h"
+
+1474149964 /home/bryan/Documentos/codigo/c++/simulacion/include/Eventos.h
+	"VarAleatorias.h"
+	<vector>
+
+1474149964 /home/bryan/Documentos/codigo/c++/simulacion/include/VarAleatorias.h
+	<random>
+	<cmath>
+
+1474149964 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Eventos.cpp
+	"Eventos.h"
+	"VarAleatorias.h"
+
+1474149964 source:/home/bryan/Documentos/codigo/c++/simulacion/src/VarAleatorias.cpp
+	"VarAleatorias.h"
+
