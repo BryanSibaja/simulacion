@@ -21,8 +21,9 @@ void Eventos::arriboPaqC1()
     colaPaq.push_back(Comp1.contadorDePaq);
     if(colaPaq.size()<4)
     {
-        if((Comp1.proc1 == false || Comp1.proc2 == false))
+        if(Comp1.procesos <2)
         {
+            ++Comp1.procesos;
             libServC1(true);
             ++Comp1.contadorDePaq;
         }
@@ -43,19 +44,50 @@ void Eventos::libServC1(bool tipo)
     }
     else
     {
+        --Comp1.procesos;
         float t=2;
         t= t+aleatorio.genExp(0.5);
         tiempo[LLEGAPAQC3]+=t;
         // se modifica el tiempo en llamar a llegaPaqC3();
-
-
-
     }
 }
 
 void Eventos::llegaAck()
-{
+{   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::default_random_engine generador(seed);
+        std::uniform_int_distribution<int> dst_uniforme(0, 99);
 
+    if(Comp3.NumSecuencia == colaPaq[0] )
+    {
+        for(int i=0; i<4; ++i)
+        {
+            int in = dst_uniforme(generador);
+            // en in hay un numero alearorio entre 1 y 100
+            if(in>5)
+            {
+                colaPaqcmp3.push_back(colaPaq[i]);
+            }
+        }
+    }
+    else
+    {
+        //correr la cola y se envia la ventana
+        while(Comp3.NumSecuencia != colaPaq[0] )
+        {
+            colaPaq.erase (colaPaq.begin());
+
+        }
+         for(int i=0; i<4; ++i)
+        {
+            int in = dst_uniforme(generador);
+            // en in hay un numero alearorio entre 1 y 100
+            if(in>5)
+            {
+                colaPaqcmp3.push_back(colaPaq[i]);
+            }
+        }
+
+    }
 }
 
 void Eventos::devolMsjC1()
@@ -108,14 +140,14 @@ void Eventos::libServC3()
                 ++Comp3.NumSecuencia;
             }
 
-            tiempo[LLEGAPAQC3]+=aleatorio.genNormal(0.5,0.01)+2;
+            tiempo[LLEGAACK] += aleatorio.genNormal(0.5,0.01)+2;
 
         }
         else
         {
             colaPaqcmp3.clear();
             Comp3.paqAProcesar=0;
-             tiempo[LLEGAPAQC3]+=2;
+            tiempo[LLEGAACK]+=2;
 
         }
 
