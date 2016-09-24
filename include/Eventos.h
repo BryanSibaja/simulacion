@@ -27,8 +27,8 @@ class Eventos
         float *tiempo;
 
         struct ProcesosC1{
-            bool proc1 = false; // procesos que envian paquetes de la c1 a la c2 o c3
-            bool proc2 = false;
+            int procesos = 0; // procesos que envian paquetes de la c1 a la c2 o c3
+
             bool SerMsj = false;   //servidores que reciben paquetes o msjs
             bool SerPaq = false;
             float timer = 0;
@@ -41,6 +41,7 @@ class Eventos
          bool servidor = false; // si el servidor de que atiende paquetes esta ocupado
          int paqAProcesar=0; //para saber que paquete que esta en la cola de la c3 le tocas e procesado
         }Comp3;
+
 
         std::vector<int> colaPaq;
         std::vector<int> colaPaqcmp3;
