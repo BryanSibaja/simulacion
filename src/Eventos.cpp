@@ -101,12 +101,7 @@ void Eventos::libServC2()
 void Eventos::llegaPaqC3()
 
 {
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine generador(seed);
-    std::uniform_int_distribution<int> dst_uniforme(0, 99);
-    int in = dst_uniforme(generador);
-    // en in hay un numero alearorio entre 1 y 100
-    if(in>5)
+    if(aleatorio.porcentaje(5))
     {
         colaPaqcmp3.push_back(colaPaq[Comp1.ventanaPaq]);
     }
@@ -141,9 +136,7 @@ void Eventos::libServC3()
             colaPaqcmp3.clear();
             Comp3.paqAProcesar=0;
             tiempo[LLEGAACK]+=2;
-
         }
-
     }
 }
 
