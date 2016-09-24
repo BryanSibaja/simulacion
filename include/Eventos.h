@@ -37,7 +37,7 @@ class Eventos
         }Comp1;
 
         struct ProcesosC3{
-         int NumSecuencia = 0; // lleva el contro del paquete que le toca ser procesado
+         int NumSecuencia = 1; // lleva el contro del paquete que le toca ser procesado
          bool servidor = false; // si el servidor de que atiende paquetes esta ocupado
          int paqAProcesar=0; //para saber que paquete que esta en la cola de la c3 le tocas e procesado
         }Comp3;

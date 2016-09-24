@@ -9,7 +9,7 @@ int main()
 {
 
 VarAleatorias a;
-float x= a.genExp(0.5)+2;
+float x= a.genNormal(0.5,0.01)+2;
 cout << x << endl;
 
 
