@@ -22,7 +22,7 @@ float VarAleatorias::genNormal(float media, float desviacion)
 
 float VarAleatorias::genExp(float lamda)
 {
-    return -(1/lamda) + log(1-aleatorio(generador));
+    return -(1/lamda) * log(1-aleatorio(generador));
 }
 
 

@@ -13,24 +13,27 @@
 1473711444 source:/home/bryan/Documentos/codigo/c++/Simulacion/src/Eventos.cpp
 	"Eventos.h"
 
-1473987301 source:c:\users\acer main\documents\github\simulacion\main.cpp
+1474674788 source:c:\users\acer main\documents\github\simulacion\main.cpp
 	<iostream>
 	"Eventos.h"
 	"VarAleatorias.h"
 
-1473993143 c:\users\acer main\documents\github\simulacion\include\eventos.h
+1474672547 c:\users\acer main\documents\github\simulacion\include\eventos.h
+	"VarAleatorias.h"
 	<vector>
 
-1473987301 c:\users\acer main\documents\github\simulacion\include\varaleatorias.h
+1474667026 c:\users\acer main\documents\github\simulacion\include\varaleatorias.h
 	<random>
 	<cmath>
 
-1473987301 source:c:\users\acer main\documents\github\simulacion\src\varaleatorias.cpp
+1474674370 source:c:\users\acer main\documents\github\simulacion\src\varaleatorias.cpp
 	"VarAleatorias.h"
 
-1473989719 source:c:\users\acer main\documents\github\simulacion\src\eventos.cpp
+1474674348 source:c:\users\acer main\documents\github\simulacion\src\eventos.cpp
 	"Eventos.h"
 	"VarAleatorias.h"
+	<chrono>
+	<random>
 
 1474149964 source:/home/bryan/Documentos/codigo/c++/simulacion/main.cpp
 	<iostream>
@@ -51,4 +54,10 @@
 
 1474149964 source:/home/bryan/Documentos/codigo/c++/simulacion/src/VarAleatorias.cpp
 	"VarAleatorias.h"
+
+1474674341 source:c:\users\acer main\documents\github\simulacion\src\simulacion.cpp
+	"Simulacion.h"
+
+1474667026 c:\users\acer main\documents\github\simulacion\include\simulacion.h
+	"Eventos.h"
 

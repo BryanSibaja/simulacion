@@ -27,16 +27,23 @@ class Eventos
         float *tiempo;
 
         struct ProcesosC1{
-            bool proc1 = false;
+            bool proc1 = false; // procesos que envian paquetes de la c1 a la c2 o c3
             bool proc2 = false;
-            bool SerMsj = false;
+            bool SerMsj = false;   //servidores que reciben paquetes o msjs
             bool SerPaq = false;
             float timer = 0;
-            int contadorDePaq = 1;
-            int ventanaPaq=0;
+            int contadorDePaq = 1;   // para enumerar los paquetes
+            int ventanaPaq=0; //posicion de la ventana para eniviar de 0-3
         }Comp1;
 
+        struct ProcesosC3{
+         int NumSecuencia = 0; // lleva el contro del paquete que le toca ser procesado
+         bool servidor = false; // si el servidor de que atiende paquetes esta ocupado
+         int paqAProcesar=0; //para saber que paquete que esta en la cola de la c3 le tocas e procesado
+        }Comp3;
+
         std::vector<int> colaPaq;
+        std::vector<int> colaPaqcmp3;
 
 };
 
