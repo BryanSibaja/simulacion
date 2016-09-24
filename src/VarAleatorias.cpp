@@ -33,5 +33,5 @@ bool VarAleatorias::porcentaje(int porcet)
 
 int VarAleatorias::genUnifor(int minim, int maxim)
 {
-    return (rand() % (maxim-minim)) + minim;
+    return ((double) rand() / (RAND_MAX)) * (maxim-minim) + minim;
 }

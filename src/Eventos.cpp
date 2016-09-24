@@ -15,6 +15,7 @@ Eventos::~Eventos()
 
 void Eventos::arriboPaqC1()
 {
+    tiempo[ARRIBOPAQC1] = *reloj + aleatorio.genUnifor(3,7);
     if(Comp1.contadorDePaq > 100)
     {
         Comp1.contadorDePaq =1;
@@ -33,7 +34,7 @@ void Eventos::arriboPaqC1()
 
 void Eventos::arriboMsjC1()
 {
-
+    tiempo[ARRIBOMSJC1] = *reloj + aleatorio.genNormal(4, 0.01);
 }
 
 void Eventos::libServC1(bool tipo)
