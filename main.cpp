@@ -24,8 +24,8 @@ cout << fifth[0]<< endl;
    // cout << fifth.size()<< endl;
 
 VarAleatorias a;
-float x= a.genNormal(0.5,0.01)+2;
-cout << x << endl;
+for (int i = 0;i < 100; i++)
+cout << a.porcentaje(67) << endl;
 
 
 

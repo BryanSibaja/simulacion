@@ -2,9 +2,8 @@
 using namespace std;
 #include <iostream>
 VarAleatorias::VarAleatorias()
-:aleatorio(0,1)
 {
-    //ctor
+    srand(time(0));
 }
 
 VarAleatorias::~VarAleatorias()
@@ -16,7 +15,7 @@ float VarAleatorias::genNormal(float media, float desviacion)
 {
     float aux = 0;
     for (int i = 0; i < 12; i++)
-        aux += aleatorio(generador);
+        aux += (double)rand() / (double)RAND_MAX;
 
     return desviacion * (aux-6) + media;
 
@@ -24,13 +23,12 @@ float VarAleatorias::genNormal(float media, float desviacion)
 
 float VarAleatorias::genExp(float lamda)
 {
-    return -(1/lamda) * log(1-aleatorio(generador));
+    return -(1/lamda) * log(1-(double)rand() / (double)RAND_MAX);
 }
 
-
-float VarAleatorias::porcentaje(float porcet)
+bool VarAleatorias::porcentaje(int porcet)
 {
 
-    float unif = aleatorio(generador);
-    return unif < porcet/100;
+    float unif = rand()%100;
+    return unif < porcet;
 }
