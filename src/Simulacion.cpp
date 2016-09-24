@@ -28,9 +28,13 @@ void Simulacion::iniciarSim()
 
             eventos.arriboPaqC1();
             break;
-        case LIBSERVC1:
+        case LIBSERV1C1:
 
-            eventos.libServC1(true);
+            eventos.libServ1C1();
+            break;
+        case LIBSERV2C1:
+
+            eventos.libServ2C1();
             break;
         case LIBSERVC2:
 

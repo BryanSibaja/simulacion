@@ -2,9 +2,12 @@
 #define EVENTOS_H
 
 #include "VarAleatorias.h"
-enum EVENTOS{ARRIBOPAQC1, ARRIBOMSJC1, LIBSERVC1, LLEGAACK, DEVOLMSJC1, LLEGAMSJC2,
+#include <deque>
+
+using namespace std;
+enum EVENTOS{ARRIBOPAQC1, ARRIBOMSJC1, LIBSERV1C1, LIBSERV2C1, LLEGAACK, DEVOLMSJC1, LLEGAMSJC2,
              LIBSERVC2, LLEGAPAQC3, LIBSERVC3, TEMP};
-#include <vector>
+
 
 class Eventos
 {
@@ -13,7 +16,8 @@ class Eventos
         virtual ~Eventos();
         void arriboPaqC1();
         void arriboMsjC1();
-        void libServC1(bool tipo); // dos eventos  false= mensaje  true = paquete
+        void libServ1C1();
+        void libServ2C1();
         void llegaAck();
         void devolMsjC1();
         void llegaMsjC2();
@@ -26,25 +30,21 @@ class Eventos
 	VarAleatorias aleatorio;
         float *tiempo;
         float *reloj;
-        struct ProcesosC1{
-            int procesos = 0; // procesos que envian paquetes de la c1 a la c2 o c3
-
-            bool SerMsj = false;   //servidores que reciben paquetes o msjs
-            bool SerPaq = false;
-            float timer = 0;
-            int contadorDePaq = 1;   // para enumerar los paquetes
-            int ventanaPaq=0; //posicion de la ventana para eniviar de 0-3
+        struct VarC1{
+            bool Ser1 = true;
+            bool Ser2 = true;
+            int conPaq = 0;
+            int evnPaq = 0;
+            bool msj = true;
+            deque<int> colPaq;
+            deque<int> colMsj;
         }Comp1;
 
-        struct ProcesosC3{
-         int NumSecuencia = 1; // lleva el contro del paquete que le toca ser procesado
-         bool servidor = false; // si el servidor de que atiende paquetes esta ocupado
-         int paqAProcesar=0; //para saber que paquete que esta en la cola de la c3 le tocas e procesado
+        struct varC2{
+            deque<int> paq;
+            int ack;
+            bool serv = true;
         }Comp3;
-
-
-        std::vector<int> colaPaq;
-        std::vector<int> colaPaqcmp3;
 
 };
 
