@@ -13,6 +13,7 @@ class Simulacion
     private:
         float tiempo[11];
         Eventos eventos;
+        float reloj;
         int elejirEvento();
 };
 

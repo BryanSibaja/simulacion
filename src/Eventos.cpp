@@ -53,17 +53,12 @@ void Eventos::libServC1(bool tipo)
 }
 
 void Eventos::llegaAck()
-{   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generador(seed);
-        std::uniform_int_distribution<int> dst_uniforme(0, 99);
-
+{
     if(Comp3.NumSecuencia == colaPaq[0] )
     {
         for(int i=0; i<4; ++i)
         {
-            int in = dst_uniforme(generador);
-            // en in hay un numero alearorio entre 1 y 100
-            if(in>5)
+            if(aleatorio.porcentaje(5))
             {
                 colaPaqcmp3.push_back(colaPaq[i]);
             }
@@ -79,9 +74,7 @@ void Eventos::llegaAck()
         }
          for(int i=0; i<4; ++i)
         {
-            int in = dst_uniforme(generador);
-            // en in hay un numero alearorio entre 1 y 100
-            if(in>5)
+            if(aleatorio.porcentaje(5))
             {
                 colaPaqcmp3.push_back(colaPaq[i]);
             }

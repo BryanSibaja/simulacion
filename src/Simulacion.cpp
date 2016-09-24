@@ -3,7 +3,7 @@
 Simulacion::Simulacion():
 eventos(tiempo)
 {
-    //ctor
+    reloj = 0;
 }
 
 Simulacion::~Simulacion()

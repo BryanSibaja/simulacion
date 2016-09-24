@@ -17,7 +17,6 @@ float VarAleatorias::genNormal(float media, float desviacion)
         aux += (double)rand() / (double)RAND_MAX;
 
     return desviacion * (aux-6) + media;
-
 }
 
 float VarAleatorias::genExp(float lamda)
@@ -30,4 +29,9 @@ bool VarAleatorias::porcentaje(int porcet)
 
     float unif = rand()%100;
     return unif < porcet;
+}
+
+int VarAleatorias::genUnifor(int minim, int maxim)
+{
+    return (rand() % (maxim-minim)) + minim;
 }
