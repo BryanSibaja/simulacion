@@ -1,6 +1,5 @@
 #include "VarAleatorias.h"
-using namespace std;
-#include <iostream>
+
 VarAleatorias::VarAleatorias()
 {
     srand(time(0));
