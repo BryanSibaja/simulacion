@@ -4,6 +4,10 @@ Simulacion::Simulacion():
 eventos(tiempo, &reloj)
 {
     reloj = 0;
+    for(int i = 0; i < 11; i++)
+        tiempo[i] = numeric_limits<float>::infinity();
+    tiempo[ARRIBOPAQC1] = 4;
+    tiempo[ARRIBOMSJC1] = 5;
 }
 
 Simulacion::~Simulacion()

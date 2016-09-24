@@ -39,7 +39,7 @@
 	<chrono>
 	<random>
 
-1474698462 source:/home/bryan/Documentos/codigo/c++/simulacion/main.cpp
+1474727864 source:/home/bryan/Documentos/codigo/c++/simulacion/main.cpp
 	<iostream>
 	"Eventos.h"
 	"VarAleatorias.h"
@@ -104,7 +104,7 @@
 	"VarAleatorias.h"
 	<iostream>
 
-1474727213 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Simulacion.cpp
+1474727791 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Simulacion.cpp
 	"Simulacion.h"
 
 1474725205 /home/bryan/Documentos/codigo/c++/simulacion/include/Simulacion.h

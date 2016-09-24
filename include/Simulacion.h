@@ -2,6 +2,9 @@
 #define SIMULACION_H
 
 #include "Eventos.h"
+#include <limits>
+
+using namespace std;
 
 class Simulacion
 {
