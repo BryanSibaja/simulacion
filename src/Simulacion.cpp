@@ -1,7 +1,7 @@
 #include "Simulacion.h"
 
 Simulacion::Simulacion():
-eventos(tiempo)
+eventos(tiempo, &reloj)
 {
     reloj = 0;
 }
@@ -14,6 +14,7 @@ Simulacion::~Simulacion()
 void Simulacion::iniciarSim()
 {
     int e = elejirEvento();
+    reloj = tiempo[e];
     switch(e){
         case ARRIBOMSJC1:
 

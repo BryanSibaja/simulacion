@@ -2,9 +2,10 @@
 #include "VarAleatorias.h"
 #include <chrono>   // para generar aleatorios
 #include <random> // para generar aleatorios
-Eventos::Eventos(float t[])
+Eventos::Eventos(float t[], float* r)
 {
     tiempo = t;
+    reloj = r;
 }
 
 Eventos::~Eventos()
@@ -47,7 +48,7 @@ void Eventos::libServC1(bool tipo)
         --Comp1.procesos;
         float t=2;
         t= t+aleatorio.genExp(0.5);
-        tiempo[LLEGAPAQC3]+=t;
+        tiempo[LLEGAPAQC3] = *reloj + t;
         // se modifica el tiempo en llamar a llegaPaqC3();
     }
 }
@@ -128,14 +129,14 @@ void Eventos::libServC3()
                 ++Comp3.NumSecuencia;
             }
 
-            tiempo[LLEGAACK] += aleatorio.genNormal(0.5,0.01)+2;
+            tiempo[LLEGAACK] = *reloj + aleatorio.genNormal(0.5,0.01)+2;
 
         }
         else
         {
             colaPaqcmp3.clear();
             Comp3.paqAProcesar=0;
-            tiempo[LLEGAACK]+=2;
+            tiempo[LLEGAACK] = *reloj + 2;
         }
     }
 }

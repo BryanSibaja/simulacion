@@ -9,7 +9,7 @@ enum EVENTOS{ARRIBOPAQC1, ARRIBOMSJC1, LIBSERVC1, LLEGAACK, DEVOLMSJC1, LLEGAMSJ
 class Eventos
 {
     public:
-        Eventos(float t[]);
+        Eventos(float t[], float* r);
         virtual ~Eventos();
         void arriboPaqC1();
         void arriboMsjC1();
@@ -25,7 +25,7 @@ class Eventos
     private:
 	VarAleatorias aleatorio;
         float *tiempo;
-
+        float *reloj;
         struct ProcesosC1{
             int procesos = 0; // procesos que envian paquetes de la c1 a la c2 o c3
 
