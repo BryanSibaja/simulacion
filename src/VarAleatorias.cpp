@@ -1,5 +1,6 @@
 #include "VarAleatorias.h"
-
+using namespace std;
+#include <iostream>
 VarAleatorias::VarAleatorias()
 :aleatorio(0,1)
 {
@@ -16,6 +17,7 @@ float VarAleatorias::genNormal(float media, float desviacion)
     float aux = 0;
     for (int i = 0; i < 12; i++)
         aux += aleatorio(generador);
+
     return desviacion * (aux-6) + media;
 
 }

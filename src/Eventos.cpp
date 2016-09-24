@@ -46,7 +46,7 @@ void Eventos::libServC1(bool tipo)
         float t=2;
         t= t+aleatorio.genExp(0.5);
         tiempo[LLEGAPAQC3]+=t;
-       // se debe modificar el tiempo en llamar a llegaPaqC3();
+        // se modifica el tiempo en llamar a llegaPaqC3();
 
 
 
@@ -75,13 +75,15 @@ void Eventos::libServC2()
 
 void Eventos::llegaPaqC3()
 
-{     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::default_random_engine generador(seed);
-        std::uniform_int_distribution<int> dst_uniforme(0, 99);
-        int in = dst_uniforme(generador);
-        // en in hay un numero alearorio entre 1 y 100
-    if(in>5){
-    colaPaqcmp3.push_back(colaPaq[Comp1.ventanaPaq]);
+{
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generador(seed);
+    std::uniform_int_distribution<int> dst_uniforme(0, 99);
+    int in = dst_uniforme(generador);
+    // en in hay un numero alearorio entre 1 y 100
+    if(in>5)
+    {
+        colaPaqcmp3.push_back(colaPaq[Comp1.ventanaPaq]);
     }
     if(Comp1.ventanaPaq < 3)
         ++Comp1.ventanaPaq;
@@ -96,9 +98,24 @@ void Eventos::libServC3()
     {
         if(colaPaqcmp3[Comp3.paqAProcesar]== Comp3.NumSecuencia) //si esta en la secuencia correcta
         {
-            //se envia el ack y se almacena en disco
-            //se debe calcular el tiempo en que llega un ack
+            ++Comp3.paqAProcesar;
+            if(Comp3.NumSecuencia > 100)
+            {
+                Comp3.NumSecuencia =1;
+            }
+            else
+            {
+                ++Comp3.NumSecuencia;
+            }
 
+            tiempo[LLEGAPAQC3]+=aleatorio.genNormal(0.5,0.01)+2;
+
+        }
+        else
+        {
+            colaPaqcmp3.clear();
+            Comp3.paqAProcesar=0;
+             tiempo[LLEGAPAQC3]+=2;
 
         }
 
