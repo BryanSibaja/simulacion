@@ -21,19 +21,21 @@
 	<chrono>
 	<random>
 
-1474683290 c:\users\acer main\documents\github\simulacion\include\eventos.h
+1474773992 c:\users\acer main\documents\github\simulacion\include\eventos.h
+	<iostream>
 	"VarAleatorias.h"
-	<vector>
+	<deque>
+	<limits>
 
-1474667026 c:\users\acer main\documents\github\simulacion\include\varaleatorias.h
-	<random>
+1474757094 c:\users\acer main\documents\github\simulacion\include\varaleatorias.h
+	<stdlib.h>
+	<time.h>
 	<cmath>
 
-1474676356 source:c:\users\acer main\documents\github\simulacion\src\varaleatorias.cpp
+1474757094 source:c:\users\acer main\documents\github\simulacion\src\varaleatorias.cpp
 	"VarAleatorias.h"
-	<iostream>
 
-1474683725 source:c:\users\acer main\documents\github\simulacion\src\eventos.cpp
+1474774569 source:c:\users\acer main\documents\github\simulacion\src\eventos.cpp
 	"Eventos.h"
 	"VarAleatorias.h"
 	<chrono>
@@ -66,11 +68,14 @@
 1474730269 source:/home/bryan/Documentos/codigo/c++/simulacion/src/VarAleatorias.cpp
 	"VarAleatorias.h"
 
-1474674341 source:c:\users\acer main\documents\github\simulacion\src\simulacion.cpp
+1474774569 source:c:\users\acer main\documents\github\simulacion\src\simulacion.cpp
 	"Simulacion.h"
 
-1474667026 c:\users\acer main\documents\github\simulacion\include\simulacion.h
+1474774569 c:\users\acer main\documents\github\simulacion\include\simulacion.h
+	<iostream>
 	"Eventos.h"
+	<limits>
+	<unistd.h>
 
 1474698462 source:/home/bryan/Documentos/codigo/c++/sim/simulacion/main.cpp
 	<iostream>

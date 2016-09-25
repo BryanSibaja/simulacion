@@ -1,6 +1,6 @@
 #ifndef SIMULACION_H
 #define SIMULACION_H
-
+#include <iostream>
 #include "Eventos.h"
 #include <limits>
 #include <unistd.h>

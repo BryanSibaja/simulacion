@@ -2,6 +2,7 @@
 #include "VarAleatorias.h"
 #include <chrono>   // para generar aleatorios
 #include <random> // para generar aleatorios
+using namespace std;
 Eventos::Eventos(float t[], float* r)
 {
     tiempo = t;
@@ -26,6 +27,7 @@ void Eventos::arriboPaqC1()
 }
 
 void Eventos::arriboMsjC1()
+
 {
     Comp1.colMsj.push_back(Comp1.conMsj);
     ++Comp1.conMsj;
@@ -70,7 +72,7 @@ void Eventos::libServ1C1()
             // mensajes
             tiempo[LIBSERV1C1] = *reloj + 1;
             tiempo[LLEGAMSJC2]= *reloj+4; // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
-                                            // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
+            // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
         }
     }
     else
@@ -81,7 +83,7 @@ void Eventos::libServ1C1()
 
 
 void Eventos::llegaAck()
-{
+{   Comp1.ultimoAck=Comp3.ack;
     if( Comp3.ack == Comp1.colPaq[Comp1.evnPaq])
     {
         for(int i = 0; i < Comp1.evnPaq; i++)
@@ -120,8 +122,8 @@ void Eventos::libServC2()
         }
         else
         {
-           float duracion = aleatorio.genExp(1);
-           tiempo[DEVOLMSJC1] = *reloj+ duracion+3;
+            float duracion = aleatorio.genExp(1);
+            tiempo[DEVOLMSJC1] = *reloj+ duracion+3;
             tiempo[LIBSERVC2] = *reloj+duracion;
 
         }
@@ -135,7 +137,6 @@ void Eventos::libServC2()
 
 void Eventos::llegaPaqC3()
 {
-    tiempo[TEMP] = *reloj + 20;
     Comp3.paq.push_back(Comp1.colPaq[Comp1.evnPaq]);
     if(Comp3.serv)
     {
@@ -149,6 +150,7 @@ void Eventos::libServC3()
     if(Comp3.ack == Comp3.paq.front())
     {
         Comp3.ack++;
+        Comp3.paqRecibidosBien.push_front(Comp3.paq.front());
         Comp3.paq.pop_front();
         tiempo[LIBSERVC3]= *reloj+ aleatorio.genNormal(1.5, 0.01);
     }
@@ -165,7 +167,7 @@ void Eventos::libServC3()
 
 void Eventos::temp()
 {
-    tiempo[LLEGAACK] = *reloj + 2;
+ tiempo[LLEGAACK] = *reloj + 2;
     tiempo[TEMP] = *reloj + 20;
 }
 
@@ -195,19 +197,41 @@ void Eventos::libServ2C1()
             {
                 float duracion = aleatorio.genExp(0.5);
                 tiempo[LLEGAPAQC3] = *reloj + duracion + 2;
-                tiempo[LIBSERV1C1] = *reloj + duracion;
+                tiempo[LIBSERV2C1] = *reloj + duracion;
             }
         }
         else
         {
             // mensajes
-            tiempo[LIBSERV1C1] = *reloj + 1;
+            tiempo[LIBSERV2C1] = *reloj + 1;
             tiempo[LLEGAMSJC2]= *reloj+4; // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
-                                            // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
+            // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
         }
     }
     else
     {
-        tiempo[LIBSERV1C1] = *reloj + 2;
+        tiempo[LIBSERV2C1] = *reloj + 2;
     }
 }
+
+void Eventos::imprInfo()
+{
+    cout<<"El reloj del sistema"<< reloj <<endl;
+    cout<<"Longitud de la cola mensajes"<< Comp1.colMsj.size()<<endl;
+    cout<<"Longitud de la cola paquetes"<< Comp1.colPaq.size() <<endl;
+    cout<<"En ventana: ";
+    for (int i=0; i<4; i++)
+        cout<<Comp1.colPaq[i]<<", ";
+    cout<<" el resto: ";
+    for (int i=4; i<20; i++)
+        cout<<Comp1.colPaq[i]<<", ";
+    cout<<" \n Ultimo ACK recibido por Serv. No.1: "<< Comp1.ultimoAck<<endl;
+    cout<<"Ultimo ACK enviado por Serv. No.3,: "<< Comp3.ack <<endl;
+    cout<<"Paquetes correctamente recibidos por Serv. No.3: "<< Comp3.paqRecibidosBien.size() <<endl;
+    cout<<"Paquetes recibidos bien: "<<endl;
+     for (int i=0; i<20; i++)
+        cout<<Comp3.paqRecibidosBien[i]<<", ";
+   // cout<<"Tipo de evento: "<<endl;
+
+}
+

@@ -1,6 +1,6 @@
 #ifndef EVENTOS_H
 #define EVENTOS_H
-
+#include <iostream>
 #include "VarAleatorias.h"
 #include <deque>
 #include <limits>
@@ -25,7 +25,7 @@ class Eventos
         void llegaPaqC3();
         void libServC3();
         void temp();
-
+        void imprInfo();
     private:
 	VarAleatorias aleatorio;
         float *tiempo;
@@ -39,6 +39,7 @@ class Eventos
             bool msj = true;
             deque<int> colPaq;
             deque<int> colMsj;
+            int ultimoAck=0;
         }Comp1;
 
          struct varC2{
@@ -48,8 +49,9 @@ class Eventos
 
          struct varC3{
             deque<int> paq;
-            int ack;
+            int ack=0;
             bool serv = true;
+            deque<int> paqRecibidosBien;
         }Comp3;
 };
 
