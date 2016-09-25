@@ -19,9 +19,15 @@ void Eventos::arriboPaqC1()
     Comp1.colPaq.push_back(Comp1.conPaq);
     Comp1.conPaq = ++Comp1.conPaq % 100;
     if(Comp1.Ser1)
+    {
+        Comp1.Ser1=false;
         tiempo[LIBSERV1C1] = *reloj;
-    if(Comp1.Ser2)
+    }
+    else if(Comp1.Ser2)
+    {
+        Comp1.Ser2=false;
         tiempo[LIBSERV2C1] = *reloj;
+    }
 
     tiempo[ARRIBOPAQC1] = *reloj + aleatorio.genUnifor(3,7);
 }
@@ -33,7 +39,7 @@ void Eventos::arriboMsjC1()
     ++Comp1.conMsj;
     if(Comp1.Ser1)
         tiempo[LIBSERV1C1] = *reloj;
-    if(Comp1.Ser2)
+    else if(Comp1.Ser2)
         tiempo[LIBSERV2C1] = *reloj;
     tiempo[ARRIBOMSJC1] = *reloj + aleatorio.genNormal(4, 0.01);
 }
@@ -41,9 +47,10 @@ void Eventos::arriboMsjC1()
 void Eventos::libServ1C1()
 {
     bool cola = false;
-    if ( !Comp1.colPaq.empty() && Comp1.evnPaq < 4 && !Comp1.colMsj.empty())
+    if ( (((Comp1.colPaq.size()-1)>Comp1.evnPaq) && Comp1.evnPaq < 4) && !Comp1.colMsj.empty())
     {
         cola = aleatorio.porcentaje(50);
+        cout<< cola<< " cola es "<< endl;
     }
     else
     {
@@ -68,7 +75,7 @@ void Eventos::libServ1C1()
             }
         }
         else
-        {
+        {cout<< cola<< " cola es en mensaje  "<< endl;
             // mensajes
             tiempo[LIBSERV1C1] = *reloj + 1;
             tiempo[LLEGAMSJC2]= *reloj+4; // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
@@ -79,17 +86,27 @@ void Eventos::libServ1C1()
     {
         tiempo[LIBSERV1C1] = *reloj + 2;
     }
+    Comp1.Ser1=false;
 }
 
 
 void Eventos::llegaAck()
-{   Comp1.ultimoAck=Comp3.ack;
+{
+    Comp1.ultimoAck=Comp3.ack;
     if( Comp3.ack == Comp1.colPaq[Comp1.evnPaq])
     {
         for(int i = 0; i < Comp1.evnPaq; i++)
             Comp1.colPaq.pop_front();
+
     }
-    Comp1.evnPaq = 0;
+    else
+    {
+        Comp1.evnPaq = 0;
+
+    }
+    tiempo[LIBSERV1C1]=*reloj;
+    tiempo[LIBSERV2C1]=*reloj;
+    tiempo[LLEGAACK]=numeric_limits<float>::infinity();
 }
 
 void Eventos::devolMsjC1()
@@ -167,16 +184,17 @@ void Eventos::libServC3()
 
 void Eventos::temp()
 {
- tiempo[LLEGAACK] = *reloj + 2;
+    tiempo[LLEGAACK] = *reloj + 2;
     tiempo[TEMP] = *reloj + 20;
 }
 
 void Eventos::libServ2C1()
 {
     bool cola = false;
-    if ( !Comp1.colPaq.empty() && Comp1.evnPaq < 4 && !Comp1.colMsj.empty())
+    if ( (((Comp1.colPaq.size()-1)>Comp1.evnPaq) && Comp1.evnPaq < 4) && !Comp1.colMsj.empty())
     {
         cola = aleatorio.porcentaje(50);
+        cout<< cola<< " cola es "<< endl;
     }
     else
     {
@@ -201,7 +219,7 @@ void Eventos::libServ2C1()
             }
         }
         else
-        {
+        {cout<< cola<< " cola es en mensaje  "<< endl;
             // mensajes
             tiempo[LIBSERV2C1] = *reloj + 1;
             tiempo[LLEGAMSJC2]= *reloj+4; // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
@@ -212,26 +230,31 @@ void Eventos::libServ2C1()
     {
         tiempo[LIBSERV2C1] = *reloj + 2;
     }
+    Comp1.Ser2=false;
 }
 
 void Eventos::imprInfo()
 {
-    cout<<"El reloj del sistema"<< reloj <<endl;
-    cout<<"Longitud de la cola mensajes"<< Comp1.colMsj.size()<<endl;
-    cout<<"Longitud de la cola paquetes"<< Comp1.colPaq.size() <<endl;
+    cout<<"El reloj del sistema: "<< *reloj <<endl;
+    cout<<"Longitud de la cola mensajes: "<< Comp1.colMsj.size()<<endl;
+    cout<<"Longitud de la cola paquetes: "<< Comp1.colPaq.size() <<endl;
     cout<<"En ventana: ";
-    for (int i=0; i<4; i++)
-        cout<<Comp1.colPaq[i]<<", ";
-    cout<<" el resto: ";
-    for (int i=4; i<20; i++)
-        cout<<Comp1.colPaq[i]<<", ";
+    if(Comp1.colPaq.size()>0)
+    {
+        for (int i=0; i<Comp1.colPaq.size(); i++)
+            cout<<Comp1.colPaq[i]<<", ";
+
+        cout<<" el resto: ";
+        for (int i=4; i<Comp1.colPaq.size(); i++)
+            cout<<Comp1.colPaq[i]<<", ";
+    }
     cout<<" \n Ultimo ACK recibido por Serv. No.1: "<< Comp1.ultimoAck<<endl;
     cout<<"Ultimo ACK enviado por Serv. No.3,: "<< Comp3.ack <<endl;
     cout<<"Paquetes correctamente recibidos por Serv. No.3: "<< Comp3.paqRecibidosBien.size() <<endl;
     cout<<"Paquetes recibidos bien: "<<endl;
-     for (int i=0; i<20; i++)
+    for (int i=0; i<Comp3.paqRecibidosBien.size(); i++)
         cout<<Comp3.paqRecibidosBien[i]<<", ";
-   // cout<<"Tipo de evento: "<<endl;
+    // cout<<"Tipo de evento: "<<endl;
 
 }
 
