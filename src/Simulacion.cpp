@@ -1,7 +1,7 @@
 #include "Simulacion.h"
 
 Simulacion::Simulacion():
-eventos(tiempo, &reloj)
+    eventos(tiempo, &reloj)
 {
     reloj = 0;
     for(int i = 0; i < 11; i++)
@@ -15,11 +15,14 @@ Simulacion::~Simulacion()
     //dtor
 }
 
-void Simulacion::iniciarSim()
+void Simulacion::iniciarSim(float duracion, bool lento)
 {
-    int e = elejirEvento();
-    reloj = tiempo[e];
-    switch(e){
+    while( reloj < duracion)
+    {
+        int e = elejirEvento();
+        reloj = tiempo[e];
+        switch(e)
+        {
         case ARRIBOMSJC1:
 
             eventos.arriboMsjC1();
@@ -65,13 +68,18 @@ void Simulacion::iniciarSim()
             eventos.temp();
 
             break;
+        }
+        if(lento){
+            usleep(2000000);
+        }
     }
 }
 
 int Simulacion::elejirEvento()
 {
     int e = 0;
-    for(int i =0; i < 11; i++){
+    for(int i =0; i < 11; i++)
+    {
         if (tiempo[e] > tiempo[i])
             e = i;
     }

@@ -47,16 +47,17 @@
 	<chrono>
 	<random>
 
-1474759851 /home/bryan/Documentos/codigo/c++/simulacion/include/Eventos.h
+1474770677 /home/bryan/Documentos/codigo/c++/simulacion/include/Eventos.h
 	"VarAleatorias.h"
 	<deque>
+	<limits>
 
 1474697740 /home/bryan/Documentos/codigo/c++/simulacion/include/VarAleatorias.h
 	<stdlib.h>
 	<time.h>
 	<cmath>
 
-1474760164 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Eventos.cpp
+1474770677 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Eventos.cpp
 	"Eventos.h"
 	"VarAleatorias.h"
 	<chrono>

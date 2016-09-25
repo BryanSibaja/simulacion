@@ -3,6 +3,7 @@
 
 #include "Eventos.h"
 #include <limits>
+#include <unistd.h>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ class Simulacion
     public:
         Simulacion();
         virtual ~Simulacion();
-        void iniciarSim();
+        void iniciarSim(float duracion, bool lento);
 
     private:
         float tiempo[11];
