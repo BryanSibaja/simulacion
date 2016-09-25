@@ -57,7 +57,7 @@
 	<time.h>
 	<cmath>
 
-1474770677 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Eventos.cpp
+1474774258 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Eventos.cpp
 	"Eventos.h"
 	"VarAleatorias.h"
 	<chrono>
@@ -105,10 +105,11 @@
 	"VarAleatorias.h"
 	<iostream>
 
-1474760338 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Simulacion.cpp
+1474774114 source:/home/bryan/Documentos/codigo/c++/simulacion/src/Simulacion.cpp
 	"Simulacion.h"
 
-1474728884 /home/bryan/Documentos/codigo/c++/simulacion/include/Simulacion.h
+1474771312 /home/bryan/Documentos/codigo/c++/simulacion/include/Simulacion.h
 	"Eventos.h"
 	<limits>
+	<unistd.h>
 

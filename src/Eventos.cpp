@@ -26,7 +26,6 @@ void Eventos::arriboPaqC1()
 }
 
 void Eventos::arriboMsjC1()
-
 {
     Comp1.colMsj.push_back(Comp1.conMsj);
     ++Comp1.conMsj;
@@ -136,6 +135,7 @@ void Eventos::libServC2()
 
 void Eventos::llegaPaqC3()
 {
+    tiempo[TEMP] = *reloj + 20;
     Comp3.paq.push_back(Comp1.colPaq[Comp1.evnPaq]);
     if(Comp3.serv)
     {
@@ -165,10 +165,49 @@ void Eventos::libServC3()
 
 void Eventos::temp()
 {
-
+    tiempo[LLEGAACK] = *reloj + 2;
+    tiempo[TEMP] = *reloj + 20;
 }
 
 void Eventos::libServ2C1()
 {
+    bool cola = false;
+    if ( !Comp1.colPaq.empty() && Comp1.evnPaq < 4 && !Comp1.colMsj.empty())
+    {
+        cola = aleatorio.porcentaje(50);
+    }
+    else
+    {
+        if (!Comp1.colPaq.empty() && Comp1.evnPaq < 4)
+            cola = true ; // se elige paq
+        else if(!Comp1.colMsj.empty())
+        {
+            cola = false; // se elige msj
+        }
+    }
 
+    if ( !Comp1.colPaq.empty() || !Comp1.colMsj.empty())
+    {
+        if (cola)
+        {
+            Comp1.evnPaq++;
+            if(aleatorio.porcentaje(95))
+            {
+                float duracion = aleatorio.genExp(0.5);
+                tiempo[LLEGAPAQC3] = *reloj + duracion + 2;
+                tiempo[LIBSERV1C1] = *reloj + duracion;
+            }
+        }
+        else
+        {
+            // mensajes
+            tiempo[LIBSERV1C1] = *reloj + 1;
+            tiempo[LLEGAMSJC2]= *reloj+4; // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
+                                            // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
+        }
+    }
+    else
+    {
+        tiempo[LIBSERV1C1] = *reloj + 2;
+    }
 }

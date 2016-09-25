@@ -8,6 +8,7 @@ Simulacion::Simulacion():
         tiempo[i] = numeric_limits<float>::infinity();
     tiempo[ARRIBOPAQC1] = 4;
     tiempo[ARRIBOMSJC1] = 5;
+    tiempo[TEMP] = 20;
 }
 
 Simulacion::~Simulacion()
