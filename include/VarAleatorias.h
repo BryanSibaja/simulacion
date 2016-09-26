@@ -16,7 +16,8 @@ class VarAleatorias
         virtual ~VarAleatorias();
         float genNormal(float media, float desviacion);
         float genExp(float lamda);
-        int genUnifor(int minim, int maxim);
+        float genUnifor(float minim, float maxim);
+        float distrubucion();
         bool porcentaje(int porcet);
     private:
 };

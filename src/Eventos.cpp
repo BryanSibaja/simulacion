@@ -76,7 +76,7 @@ void Eventos::libServ1C1()
             cout << "Enviando mensaje " << Comp1.colMsj.front() << endl;
             Comp2.trans.push_back(Comp1.colMsj.front());
             Comp1.colMsj.pop_front();
-            tiempo->push(Event(LIBSERV1C1,*reloj + 1));
+            tiempo->push(Event(LIBSERV1C1,*reloj + aleatorio.distrubucion()));
             tiempo->push(Event(LLEGAMSJC2,*reloj+4)); // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
             // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
         }
@@ -215,8 +215,8 @@ void Eventos::libServ2C1()
         cout << "Enviando mensaje " << Comp1.colMsj.front() << endl;
         Comp2.trans.push_back(Comp1.colMsj.front());
         Comp1.colMsj.pop_front();
-        tiempo->push(Event(LIBSERV2C1,*reloj + 1));
-        tiempo->push(Event(LLEGAMSJC2,*reloj+4)); // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
+        tiempo->push(Event(LIBSERV2C1,*reloj + aleatorio.distrubucion()));
+        tiempo->push(Event(LLEGAMSJC2,*reloj+3 + aleatorio.distrubucion())); // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
         // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
     }
     else

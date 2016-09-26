@@ -6,7 +6,6 @@ Simulacion::Simulacion():
     reloj = 0;
     tiempo.push(Event(ARRIBOPAQC1,4));
     tiempo.push(Event(ARRIBOMSJC1,5));
-    //tiempo[TEMP].push_back(20);
 }
 
 Simulacion::~Simulacion()

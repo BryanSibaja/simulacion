@@ -19,7 +19,6 @@ class Simulacion
         Eventos eventos;
         float reloj;
         float tiemp = 20;
-        int elejirEvento();
 };
 
 #endif // SIMULACION_H
