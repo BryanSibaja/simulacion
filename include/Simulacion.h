@@ -2,8 +2,8 @@
 #define SIMULACION_H
 #include <iostream>
 #include "Eventos.h"
-#include <limits>
 #include <unistd.h>
+#include <queue>
 
 using namespace std;
 
@@ -15,9 +15,10 @@ class Simulacion
         void iniciarSim(float duracion, bool lento);
 
     private:
-        float tiempo[11];
+        priority_queue<Event> tiempo;
         Eventos eventos;
         float reloj;
+        float tiemp = 20;
         int elejirEvento();
 };
 

@@ -1,6 +1,4 @@
 #include <iostream>
-#include "Eventos.h"
-#include "VarAleatorias.h"
 #include <vector>
 #include <chrono>
 #include <random>
@@ -9,18 +7,18 @@ using namespace std;
 
 int main()
 {
-    cout << "Ingrese la cantidad de veces que desea correr la simulación" << endl;
+    cout << "Ingrese la cantidad de veces que desea correr la simulaciÃ³n" << endl;
     int corridas=0;
    // cin>>corridas;
-    cout << "Ingrese el tiempo total en segundos para correr la simulación" << endl;
+    cout << "Ingrese el tiempo total en segundos para correr la simulaciÃ³n" << endl;
     int tiempo=0;
   //  cin>>tiempo;
-    cout << "Desea ver la simulación correr en modo lento o no? s/n" << endl;
+    cout << "Desea ver la simulaciÃ³n correr en modo lento o no? s/n" << endl;
     char modo=' ';
    // cin>>modo;
     Simulacion sim;
 
-
+    sim.iniciarSim(2000,false);
 
 
 

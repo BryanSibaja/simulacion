@@ -22,8 +22,10 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-g" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Event.h" />
 		<Unit filename="include/Eventos.h" />
 		<Unit filename="include/Simulacion.h" />
 		<Unit filename="include/VarAleatorias.h" />

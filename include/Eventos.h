@@ -1,18 +1,19 @@
 #ifndef EVENTOS_H
 #define EVENTOS_H
 #include <iostream>
-#include "VarAleatorias.h"
 #include <deque>
-#include <limits>
+#include <queue>
+#include "Event.h"
+#include "VarAleatorias.h"
+
 using namespace std;
 enum EVENTOS{ARRIBOMSJC1,ARRIBOPAQC1, LIBSERV1C1, LIBSERV2C1,LIBSERVC2, LIBSERVC3, LLEGAACK, LLEGAMSJC2
 , LLEGAPAQC3, DEVOLMSJC1, TEMP};
 
-
 class Eventos
 {
     public:
-        Eventos(float t[], float* r);
+        Eventos(priority_queue<Event>* t, float* r, float* tp);
         virtual ~Eventos();
         void arriboPaqC1();
         void arriboMsjC1();
@@ -28,8 +29,9 @@ class Eventos
         void imprInfo();
     private:
 	VarAleatorias aleatorio;
-        float *tiempo;
+        priority_queue<Event> *tiempo;
         float *reloj;
+        float *tiemp;
         struct VarC1{
             bool Ser1 = true;
             bool Ser2 = true;
@@ -39,16 +41,21 @@ class Eventos
             bool msj = true;
             deque<int> colPaq;
             deque<int> colMsj;
+            deque<int> ack;
+            deque<int> msjmalos;
             int ultimoAck=0;
         }Comp1;
 
          struct varC2{
             deque<int> msj;
+            deque<int> trans;
             bool serv = true;
         }Comp2;
 
          struct varC3{
             deque<int> paq;
+            deque<int> trans;
+            int molestar = 0;
             int ack=0;
             bool serv = true;
             deque<int> paqRecibidosBien;
