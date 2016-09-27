@@ -1,11 +1,15 @@
 #include "Simulacion.h"
 
 Simulacion::Simulacion():
-    eventos(&tiempo, &reloj, &tiemp)
+    eventos(tiempo, &reloj)
 {
     reloj = 0;
-    tiempo.push(Event(ARRIBOPAQC1,4));
-    tiempo.push(Event(ARRIBOMSJC1,5));
+    for(int i = 0; i < 11; i++)
+        tiempo[i] = numeric_limits<float>::infinity();
+    tiempo[ARRIBOPAQC1] = 5;
+    tiempo[ARRIBOMSJC1] = 4;
+    tiempo[TEMP] = 20;
+    iniciarSim(2000,true);
 }
 
 Simulacion::~Simulacion()
@@ -13,14 +17,12 @@ Simulacion::~Simulacion()
     //dtor
 }
 
-void Simulacion::iniciarSim(float duracion, bool lento, int t)
+void Simulacion::iniciarSim(float duracion, bool lento)
 {
-    while( reloj < duracion && !tiempo.empty())
+    while( reloj < duracion)
     {
-        if ( tiempo.top().tiempo > tiemp)
-            tiempo.push(Event(TEMP, tiemp));
-        int e = tiempo.top().evento;
-        reloj = tiempo.top().tiempo;
+        int e = elejirEvento();
+        reloj = tiempo[e];
         switch(e)
         {
         case ARRIBOMSJC1:
@@ -68,14 +70,22 @@ void Simulacion::iniciarSim(float duracion, bool lento, int t)
             eventos.temp();
             break;
         }
-        tiempo.pop();
         eventos.imprInfo();
         cout<<endl;
         if(lento)
         {
-           std::this_thread::sleep_for(std::chrono::seconds(t));
+            usleep(2000000);
         }
     }
-    eventos.imprFinal();
 }
 
+int Simulacion::elejirEvento()
+{
+    int e = 0;
+    for(int i =0; i < 11; i++)
+    {
+        if (tiempo[e] > tiempo[i])
+            e = i;
+    }
+    return e;
+}

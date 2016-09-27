@@ -24,16 +24,19 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Event.h" />
 		<Unit filename="include/Eventos.h" />
 		<Unit filename="include/Simulacion.h" />
 		<Unit filename="include/VarAleatorias.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Event.cpp" />
 		<Unit filename="src/Eventos.cpp" />
 		<Unit filename="src/Simulacion.cpp" />
 		<Unit filename="src/VarAleatorias.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

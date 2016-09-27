@@ -2,9 +2,10 @@
 #define SIMULACION_H
 #include <iostream>
 #include "Eventos.h"
-#include <limits>
 #include <unistd.h>
-
+#include <queue>
+#include <thread> //sleep _for
+#include <chrono> // crono segundos
 using namespace std;
 
 class Simulacion
@@ -12,13 +13,16 @@ class Simulacion
     public:
         Simulacion();
         virtual ~Simulacion();
-        void iniciarSim(float duracion, bool lento);
-
-    private:
-        float tiempo[11];
+        void iniciarSim(float duracion, bool lento, int t);
+        void imprFinal();
         Eventos eventos;
+    private:
+        priority_queue<Event> tiempo;
+
         float reloj;
-        int elejirEvento();
+        float tiemp = 20;
+
+
 };
 
 #endif // SIMULACION_H
