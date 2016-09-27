@@ -13,7 +13,7 @@ Simulacion::~Simulacion()
     //dtor
 }
 
-void Simulacion::iniciarSim(float duracion, bool lento)
+void Simulacion::iniciarSim(float duracion, bool lento, int t)
 {
     while( reloj < duracion && !tiempo.empty())
     {
@@ -73,7 +73,9 @@ void Simulacion::iniciarSim(float duracion, bool lento)
         cout<<endl;
         if(lento)
         {
-            usleep(2000000);
+           std::this_thread::sleep_for(std::chrono::seconds(t));
         }
     }
+    eventos.imprFinal();
 }
+

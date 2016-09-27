@@ -16,7 +16,22 @@ Eventos::~Eventos()
 
 void Eventos::arriboPaqC1()
 {
+    // se guardan datos para las estadisticas
     Comp1.colPaq.push_back(Comp1.conPaq);
+    paqEnSist.push_back(*reloj);
+// es para el promedio del tamano de las colas
+    tamProColaPaqC1+= Comp1.colPaq.size();
+    ++contVent;
+    if(Comp1.colPaq.size()<=4)
+    {
+        tamPRoVentanaC1+= Comp1.colPaq.size();
+    }
+    else
+    {
+        tamPRoVentanaC1+=4;
+    }
+
+    //inicia la logica
     Comp1.conPaq = (Comp1.conPaq + 1) % 100;
     if(Comp1.Ser1)
     {
@@ -33,10 +48,15 @@ void Eventos::arriboPaqC1()
 }
 
 void Eventos::arriboMsjC1()
-
 {
+
     Comp1.colMsj.push_back(Comp1.conMsj);
+    msjEnSist.push_back(*reloj);
+    // se guardan datos para estadisticas
+    ++contMsj;
+    tamProColaMsjC1+= Comp1.colMsj.size();
     ++Comp1.conMsj;
+    // inicia la logica
     if(Comp1.Ser1)
     {
         Comp1.Ser1 = false;
@@ -62,6 +82,8 @@ void Eventos::libServ1C1()
         {
             Comp3.trans.push_back(Comp1.colPaq[Comp1.evnPaq-1]);
             tiempo->push(Event(LLEGAPAQC3,*reloj + duracion + 2));
+            tiemTransmision+= duracion+2;
+            ++contTransmisiones;
         }
         else
         {
@@ -76,6 +98,8 @@ void Eventos::libServ1C1()
             cout << "Enviando mensaje " << Comp1.colMsj.front() << endl;
             Comp2.trans.push_back(Comp1.colMsj.front());
             Comp1.colMsj.pop_front();
+            ++contMsj;
+            tamProColaMsjC1+= Comp1.colMsj.size();
             tiempo->push(Event(LIBSERV1C1,*reloj + aleatorio.distrubucion()));
             tiempo->push(Event(LLEGAMSJC2,*reloj+4)); // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
             // función de densidad es: f(x) = 2x/3 con x entre 1 y 2 segundos.
@@ -90,10 +114,24 @@ void Eventos::libServ1C1()
 
 void Eventos::llegaAck()
 {
+    // llega un ack a la computadora1
     Comp1.ultimoAck=Comp1.ack.front();
     if( Comp1.ultimoAck == (Comp1.colPaq[0] + 1)%100)
-    {
+    {   promPaqEnSist+= *reloj-paqEnSist[0];
+        paqEnSist.pop_front();
+      // es para el promedio de permanencia
         Comp1.colPaq.pop_front();
+        //se guardan datos para las estadisticas
+        ++contPa;
+        tamProColaPaqC1+= Comp1.colPaq.size();
+        if(Comp1.colPaq.size()<=4)
+        {
+            tamPRoVentanaC1+= Comp1.colPaq.size();
+        }
+        else
+        {
+            tamPRoVentanaC1+=4;
+        }
         Comp1.evnPaq--;
     }
     else
@@ -105,6 +143,8 @@ void Eventos::llegaAck()
 
 void Eventos::devolMsjC1()
 {
+    ++contMsj;
+    tamProColaMsjC1+= Comp1.colMsj.size();
     Comp1.colMsj.push_back(Comp1.msjmalos.front());
     Comp1.msjmalos.pop_front();
     if(Comp1.Ser1)
@@ -136,6 +176,7 @@ void Eventos::libServC2()
     {
         if(aleatorio.porcentaje(80))
         {
+            promMsjEnSist+= *reloj-msjEnSist[Comp2.msj[0]];
             Comp2.msj.pop_front();
             tiempo->push(Event(LIBSERVC2, *reloj+aleatorio.genExp(1)));
         }
@@ -185,7 +226,8 @@ void Eventos::libServC3()
         else
         {
             Comp3.paq.pop_front();
-            if(Comp3.molestar){
+            if(Comp3.molestar)
+            {
                 *tiemp = * reloj + 20;
                 Comp1.ack.push_back(Comp3.ack);
                 tiempo->push(Event(LLEGAACK, *reloj + 2));
@@ -214,6 +256,8 @@ void Eventos::libServ2C1()
     {
         cout << "Enviando mensaje " << Comp1.colMsj.front() << endl;
         Comp2.trans.push_back(Comp1.colMsj.front());
+        ++contMsj;
+        tamProColaMsjC1+= Comp1.colMsj.size();
         Comp1.colMsj.pop_front();
         tiempo->push(Event(LIBSERV2C1,*reloj + aleatorio.distrubucion()));
         tiempo->push(Event(LLEGAMSJC2,*reloj+3 + aleatorio.distrubucion())); // 3 del tiempo de propagacion y 1 de distribución de probabilidad cuya
@@ -230,6 +274,8 @@ void Eventos::libServ2C1()
             {
                 Comp3.trans.push_back(Comp1.colPaq[Comp1.evnPaq-1]);
                 tiempo->push(Event(LLEGAPAQC3,*reloj + duracion + 2));
+                tiemTransmision+= duracion+2;
+                ++contTransmisiones;
             }
             else
             {
@@ -265,13 +311,37 @@ void Eventos::imprInfo()
             cout<<Comp1.colPaq[i]<<", ";
     }
     cout<<"Enviados " << Comp1.evnPaq;
-    cout<<" \n Ultimo ACK recibido por Serv. No.1: "<< Comp1.ultimoAck<<endl;
-    cout<<"Ultimo ACK enviado por Serv. No.3,: "<< Comp3.ack <<endl;
+    cout<<" \n Ultimo ACK recibido por Serv. No.1: "<< Comp1.ultimoAck-1<<endl;
+    cout<<"Ultimo ACK enviado por Serv. No.3,: "<< Comp3.ack-1 <<endl;
     cout<<"Paquetes correctamente recibidos por Serv. No.3: "<< Comp3.paqRecibidosBien.size() <<endl;
-    cout<<"Paquetes recibidos bien: "<<endl;
+    cout<<"Paquetes recibidos bien en la comp3: "<<endl;
     for (unsigned int i=0; i<Comp3.paqRecibidosBien.size(); i++)
         cout<<Comp3.paqRecibidosBien[i]<<", ";
     // cout<<"Tipo de evento: "<<endl;
 
 }
 
+void Eventos::imprFinal()
+{
+    cout<<"\n\nSe esta preparando la siguiente corrida..\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    cout<<"Datos al final de la corrida: \n";
+    cout<<"Tamaño promedio de las colas en Serv. No.1:\n";
+    promCpaq=tamProColaPaqC1/contPa;
+    cout<<"Tamaño promedio de la cola de Paquetes: "<<promCpaq<<endl;
+    promCmsj= tamPRoVentanaC1/contVent;
+    cout<<"Tamaño promedio de la Ventana de Paquetes: "<<promCmsj<<endl;
+    promCven=tamProColaMsjC1/contMsj;
+    cout<<"Tamaño promedio de la cola de Mensajes: "<<promCven<<endl;
+    permaPaq = promPaqEnSist/Comp3.paqRecibidosBien.size();
+    cout<<"Tiempo promedio de permanencia de un paquete en el sistema: "<<permaPaq<<endl;
+    permaMsj= promMsjEnSist/Comp1.conMsj;
+    cout<<"Tiempo promedio de permanencia de un mensaje en el sistema: "<<permaMsj<<endl;
+    promTrans = tiemTransmision/contTransmisiones;
+    cout<<"Promedio del tiempo de transmision para un paquete(se pueden enviar varias veces el mismo paq): "<<promTrans<<endl;
+    tiemServ= permaPaq/promTrans;
+    cout<<"Tiempo promedio de servicio (para un paquete): "<<tiemServ<<endl;
+    eficiencia= promTrans/tiemServ;
+    cout<<"Eficiencia: "<<eficiencia<<endl;
+
+}
